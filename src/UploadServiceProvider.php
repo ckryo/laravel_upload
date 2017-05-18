@@ -2,7 +2,6 @@
 
 namespace Ckryo\Laravel\Upload;
 
-use Ckryo\Laravel\Http\ErrorCode;
 use Illuminate\Support\ServiceProvider;
 
 class UploadServiceProvider extends ServiceProvider
@@ -13,7 +12,7 @@ class UploadServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(ErrorCode $errorCode)
+    public function boot()
     {
         $this->loadRoutesFrom(__DIR__.'/routes.php');
     }
