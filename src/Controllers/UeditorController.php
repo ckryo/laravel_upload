@@ -2,9 +2,7 @@
 
 namespace Ckryo\Laravel\Upload\Controllers;
 
-use App\Http\Controllers\Controller;
-use Ckryo\Laravel\Admin\Auth;
-use Ckryo\Laravel\Upload\Services\OSS;
+use Ckryo\Laravel\App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 // 用于文件、附件上传

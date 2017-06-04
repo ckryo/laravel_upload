@@ -2,7 +2,8 @@
 
 namespace Ckryo\Laravel\Upload\Controllers;
 
-use Ckryo\Laravel\Admin\Auth;
+use Ckryo\Laravel\App\Http\Controllers\Controller;
+use Ckryo\Laravel\Auth\Auth;
 use Ckryo\Laravel\Upload\Services\OSS;
 use Illuminate\Http\Request;
 
