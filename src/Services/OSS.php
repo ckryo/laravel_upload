@@ -27,6 +27,7 @@ class OSS {
             $this->config['accessKeyId'],
             $this->config['accessKeySecret']
         );
+        $this->ossClient->setBucket($this->config['name']);
     }
 
 
@@ -39,42 +40,28 @@ class OSS {
      * @param array $options
      * @return string url
      */
-    public static function upload($bucketName, $ossKey, $filePath, $options = []) {
+    public static function upload($ossKey, $filePath, $options = []) {
         $oss = new OSS();
-
-        $bucketName = strtolower($bucketName);
-        $bucket = $oss->config['buckets'][$bucketName];
-        $oss->ossClient->setBucket($bucket['name']);
-
         $oss->ossClient->uploadFile($ossKey, $filePath, $options);
-
-        return '//'.$bucket['domain'].'/'.$ossKey;
+        return '//'.$oss->config['domain'].'/'.$ossKey;
     }
 
-    public static function uploadContent($bucketName, $ossKey, $content, $options = []) {
+    public static function uploadContent($ossKey, $content, $options = []) {
         $oss = new OSS();
-
-        $bucketName = strtolower($bucketName);
-        $bucket = $oss->config['buckets'][$bucketName];
-        $oss->ossClient->setBucket($bucket['name']);
-
         $oss->ossClient->uploadContent($ossKey, $content, $options);
-
-        return '//'.$bucket['domain'].'/'.$ossKey;
+        return '//'.$oss->config['domain'].'/'.$ossKey;
     }
 
-    public static function listAll ($bucketName, $path) {
+    public static function listAll ($path) {
         $oss = new OSS();
-        $bucket = $oss->config['buckets'][$bucketName];
-
-        return array_map(function ($item) use ($bucket) {
-            $url = '//'.$bucket['domain'].'/'.$item;
+        return array_map(function ($item) use ($oss) {
+            $url = '//'.$oss->config['domain'].'/'.$item;
             return [
                 'url' => $url,
                 'name' => $url,
                 'preview' => $url.'/100x100'
             ];
-        }, $oss->ossClient->getAllObjectKeyWithPrefix($bucket['name'], $path));
+        }, $oss->ossClient->getAllObjectKeyWithPrefix($oss->config['name'], $path));
     }
 
     /**
