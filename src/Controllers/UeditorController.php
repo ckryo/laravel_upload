@@ -15,6 +15,5 @@ class UeditorController extends Controller
         $config_str = str_replace('$PREFIX_URL', env('UE_PREFIX_URL', '/'), preg_replace("/\/\*[\s\S]+?\*\//", "", file_get_contents($configPath)));
         $config = json_decode($config_str, true);
         return response()->json($config, 200, [], JSON_UNESCAPED_UNICODE);
-
     }
 }

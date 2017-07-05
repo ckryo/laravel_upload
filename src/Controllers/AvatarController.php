@@ -12,7 +12,7 @@ class AvatarController extends Controller
 {
 
     function store(Request $request, Auth $auth) {
-        $ossKey = '/setting/avatar/user_'.$auth->user()->id.'/avatar_'.date('YmdHis');
+        $ossKey = 'setting/avatar/user_'.$auth->user()->id.'/avatar_'.date('YmdHis');
         $url = OSS::upload($ossKey, $request->file('avatar'));
         return response()->json([
             'url' => $url,
