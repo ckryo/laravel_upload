@@ -7,6 +7,8 @@ Route::group(['namespace' => 'Ckryo\Laravel\Upload\Controllers', 'prefix' => 'up
         $router->resource('avatar', 'AvatarController');
         // 一般图片
         $router->resource('image', 'ImageController');
+
+        $router->resource('files', 'FileController');
     });
     // 百度 Ueditor
     $router->resource('ueditor', 'UeditorController');
